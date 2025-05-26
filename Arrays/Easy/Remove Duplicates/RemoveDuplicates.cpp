@@ -13,8 +13,7 @@ public:
                 nums[++index] = nums[i]; // Place it at the next index
             }
         }
-        
-        return index + 1; 
+        return index + 1; // Length of the resulting array without duplicates
     }
 };
 
