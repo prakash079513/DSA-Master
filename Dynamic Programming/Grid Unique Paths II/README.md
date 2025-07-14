@@ -38,12 +38,12 @@ We will be doing a top-down recursion, i.e we will move from the `cell[M-1][N-1]
 
 ```cpp
 int f(int i, int j, vector<vector<int>>& maze){
-		if(i == 0 && j == 0) return 1;
-		if(i < 0 || j < 0) return 0;
+    if(i == 0 && j == 0) return 1;
+    if(i < 0 || j < 0) return 0;
 
-		if(maze[i][j] == -1) return 0;
+    if(maze[i][j] == -1) return 0;
 
-		return f(i - 1, j, maze) + f(i, j - 1, maze);
+    return f(i - 1, j, maze) + f(i, j - 1, maze);
 }
 ```
 
@@ -120,8 +120,7 @@ int f(vector<vector<int>>& maze) {
         }
     }
     return dp[m - 1][n - 1];
-    }
-};
+}
 ```
 
 ### **Complexity Analysis**
