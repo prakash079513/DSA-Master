@@ -6,17 +6,13 @@ Author: [Prakash JC](https://github.com/prakash079513)
 
 Print the following pyramid pattern of height `n`:
 
-```markdown
+```
      *
     ***
-
----
-
----
-
----
-
----
+   *****
+  *******
+ *********
+***********
 ```
 
 ### Approach
