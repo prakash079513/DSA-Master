@@ -1,4 +1,4 @@
-# Pyramid Pattern
+# Star Pyramid
 
 Author: [Prakash JC](https://github.com/prakash079513)
 
