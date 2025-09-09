@@ -6,6 +6,8 @@ Author: [Prakash JC](https://prakash079513.github.io)
 
 Given an array with N positive integers and an integer K. Find the number of subsets whose sum is equal to K.
 
+## Editorial
+
 ### Recursion
 
 - At each index `i`, we have **two choices**:

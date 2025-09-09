@@ -6,8 +6,6 @@ Author: [Prakash JC](https://prakash079513.github.io)
 
 Given an array of coin denominations and a target value, count the **total number of distinct ways** to make the target using unlimited supply of each coin.
 
----
-
 ## Editorial
 
 ## Recursion

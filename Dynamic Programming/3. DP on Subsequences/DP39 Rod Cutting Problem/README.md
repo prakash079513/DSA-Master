@@ -6,9 +6,9 @@ Author: [Prakash JC](https://prakash079513.github.io)
 
 Given a rod of length `N` and an array `price[]` where `price[i]` represents the value of a rod piece of length `i+1`, determine the **maximum value** obtainable by cutting the rod into pieces. You can cut the rod in any way, and you may use each piece length **any number of times**.
 
----
+## Editorial
 
-## Understanding the Problem
+### Understanding the Problem
 
 - We are given a rod of length `N`.
 - We can either cut it into multiple smaller pieces or use it as a whole.
