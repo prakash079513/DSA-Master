@@ -155,6 +155,79 @@ void dfsIterative(int V, vector<int> adj[]) {
 }
 ```
 
+### Why we don’t write `visited[0] = 1;` right after `st.push(0)`?
+
+- In **recursive DFS**, we mark a node visited **only when we enter into that node’s function call**.
+- Similarly, in iterative DFS, we only mark a node visited when we actually **pop** it from the stack (i.e., when we “enter into it”).
+
+If we had marked `visited[0] = 1;` before pushing, that would mean “we already entered node 0”, but in reality, we haven’t processed it yet—it’s just waiting in the stack.
+
+### Purpose of the `if (!visited[node])` after popping
+
+Let’s take an example.
+
+Graph (undirected):
+
+```
+0 -- 1
+|    |
+2 -- 3
+```
+
+### Step 1
+
+- Start: push 0
+  Stack = [0]
+
+### Step 2 (Pop 0)
+
+- Pop 0 → not visited → mark visited[0] = 1
+- dfs = [0]
+- Push neighbors: 2, 1 (both unvisited)
+  Stack = [2, 1]
+
+### Step 3 (Pop 1)
+
+- Pop 1 → not visited → mark visited[1] = 1
+- dfs = [0, 1]
+- Push neighbors: 3, 0
+  - 3 is unvisited → pushed
+  - 0 is already visited → not pushed
+    Stack = [2, 3]
+
+### Step 4 (Pop 3)
+
+- Pop 3 → not visited → mark visited[3] = 1
+- dfs = [0, 1, 3]
+- Push neighbors: 2, 1
+  - 2 is still unvisited → pushed
+  - 1 is already visited → not pushed
+    Stack = [2, 2]
+
+Notice this carefully:
+
+Even though 2 was **already in the stack**, since `visited[2]` was still 0 (we haven’t popped it yet), it got pushed again.
+
+This is the duplication problem.
+
+### Step 5 (Pop 2)
+
+- Pop 2 → not visited → mark visited[2] = 1
+- dfs = [0, 1, 3, 2]
+- Push neighbors: 0, 3
+  - both visited → nothing pushed
+    Stack = [2]
+
+### Step 6 (Pop 2 again)
+
+- Pop 2 → but visited[2] = 1 → skipped
+
+### Key Intuition
+
+- **Stack can contain duplicates** because multiple neighbors may push the same node.
+- The `if (!visited[node])` ensures we only **process** a node the first time it is popped.
+- Without this check, we would add duplicates to the DFS result.
+
 ### Why reverse and push:
 
 - No problem actually, but jsut to have the same dfs final answer order as the recursion method, we do reverse and push.
