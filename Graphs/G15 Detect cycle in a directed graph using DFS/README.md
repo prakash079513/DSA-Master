@@ -71,8 +71,6 @@ bool isCyclic(int V, vector<vector<int>>& adj) {
 
 ## Approach 2: **Using One Visited Array with State Marking**
 
----
-
 ### Idea
 
 Instead of maintaining two separate arrays, we use a **single array** `state[]` with three states:
@@ -126,8 +124,6 @@ bool isCyclic(int V, vector<vector<int>>& adj) {
     return false;
 }
 ```
-
----
 
 ### Complexity Analysis
 
