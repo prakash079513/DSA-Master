@@ -40,47 +40,42 @@ BFS explores all nodes at the current distance level before moving to the next â
 ### Code
 
 ```cpp
-#include <bits/stdc++.h>
-using namespace std;
+vector<int> shortestPath(int n, vector<vector<int>>& edges) {
+    // Step 1: Build adjacency list
+    vector<vector<int>> adj(n);
+    for (auto& e : edges) { // Write loop like this, it is good.
+        adj[e[0]].push_back(e[1]);
+        adj[e[1]].push_back(e[0]);
+    }
 
-class Solution {
-public:
-    vector<int> shortestPath(int n, vector<vector<int>>& edges) {
-        // Step 1: Build adjacency list
-        vector<vector<int>> adj(n);
-        for (auto& e : edges) { // Write loop like this, it is good.
-            adj[e[0]].push_back(e[1]);
-            adj[e[1]].push_back(e[0]);
-        }
+    // Step 2: Initialize distance array
+    const int INF = 1e9;
+    vector<int> dist(n, INF);
+    dist[0] = 0; // Do not forget to initialize the source
 
-        // Step 2: Initialize distance array
-        const int INF = 1e9;
-        vector<int> dist(n, INF);
-        dist[0] = 0; // Do not forget to initialize the source
+    // Step 3: BFS traversal
+    queue<int> q;
+    q.push(0);
 
-        // Step 3: BFS traversal
-        queue<int> q;
-        q.push(0);
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
 
-        while (!q.empty()) {
-            int node = q.front();
-            q.pop();
-
-            for (int neighbor : adj[node]) { // Update and push
-                if (dist[neighbor] > dist[node] + 1) {
-                    dist[neighbor] = dist[node] + 1;
-                    q.push(neighbor);
-                }
+        for (int neighbor : adj[node]) { // Update and push
+            if (dist[neighbor] > dist[node] + 1) {
+                dist[neighbor] = dist[node] + 1;
+                q.push(neighbor);
             }
         }
-
-        // Step 4: Replace unreachable nodes with -1
-        for (int& d : dist) {
-            if (d == INF) d = -1;
-        }
-
-        return dist;
     }
+
+    // Step 4: Replace unreachable nodes with -1
+    for (int& d : dist) {
+        if (d == INF) d = -1;
+    }
+
+    return dist;
+}
 ```
 
 ### Complexity Analysis
