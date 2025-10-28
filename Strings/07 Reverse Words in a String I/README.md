@@ -15,7 +15,7 @@ Return the reordered string.
 Constraints:
 
 - `1 ≤ s.length ≤ 10⁵`
-- Contains ASCII characters
+- Contains ASCII characters.
 
 ---
 

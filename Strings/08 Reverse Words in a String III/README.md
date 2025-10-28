@@ -84,7 +84,7 @@ string reverseWords(string s) {
 
 **Time Complexity:** `O(n)` — each character reversed once
 
-**Space Complexity:** `O(1)` — in-place operations
+**Space Complexity:** `O(1)` — in-place operations.
 
 ---
 
