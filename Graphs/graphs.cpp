@@ -970,6 +970,184 @@ public:
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Word Ladder I 
+    // Given start, target words, find shortest length to target via words given in the list.
+
+    int ladderLength(string startWord, string targetWord, vector<string>& wordList) {
+        unordered_set<string> st(wordList.begin(), wordList.end());
+        if(!st.count(targetWord)) return 0;
+
+        queue<pair<string,int>> q;
+        q.push({startWord, 1});
+        st.erase(startWord);
+
+        while(!q.empty()) {
+            auto [word, level] = q.front();
+            q.pop();
+
+            if(word == targetWord) return level;
+
+            for(int i = 0; i < word.size(); i++) {
+                char original = word[i];
+
+                for(char c = 'a'; c <= 'z'; c++) {
+                    word[i] = c;
+                    if(st.count(word)) {
+                        q.push({word, level + 1});
+                        st.erase(word);
+                    }
+                }
+                word[i] = original;
+            }
+        }
+        return 0;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Word Ladder II
+    // Return the possible lists of elements in any order
+    // TUF Version
+    
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    class Solution {
+    public:
+        vector<vector<string>> findSequences(string beginWord, string endWord, vector<string> &wordList) {
+            unordered_set<string> st(wordList.begin(), wordList.end());
+            queue<vector<string>> q;
+            q.push({beginWord});
+            vector<string> usedOnLevel;
+            usedOnLevel.push_back(beginWord);
+            int level = 0;
+            vector<vector<string>> ans;
+            while (!q.empty()) {
+                vector<string> vec = q.front();
+                q.pop();
+                if (vec.size() > level) {
+                    level++;
+                    for (auto it : usedOnLevel) {
+                        st.erase(it);
+                    }
+                }
+                string word = vec.back();
+                if (word == endWord) {
+                    if (ans.size() == 0) {
+                        ans.push_back(vec);
+                    } else if (ans[0].size() == vec.size()) {
+                        ans.push_back(vec);
+                    }
+                }
+                for (int i = 0; i < word.size(); i++) {
+                    char original = word[i];
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        word[i] = c;
+                        if (st.count(word) > 0) {
+                            vec.push_back(word);
+                            q.push(vec);
+                            usedOnLevel.push_back(word);
+                            vec.pop_back();
+                        }
+                    }
+                    word[i] = original;
+                }
+            }
+            return ans;
+        }
+    };
+
+    bool comp(vector<string> a, vector<string> b) {
+        string x = "", y = "";
+        for (string i : a) x += i;
+        for (string i : b) y += i;
+        return x < y;
+    }
+
+    int main() {
+        vector<string> wordList = {"des", "der", "dfr", "dgt", "dfs"};
+        string startWord = "der", targetWord = "dfs";
+        Solution obj;
+        vector<vector<string>> ans = obj.findSequences(startWord, targetWord, wordList);
+        if (ans.size() == 0) cout << -1 << endl;
+        else {
+            sort(ans.begin(), ans.end(), comp);
+            for (int i = 0; i < ans.size(); i++) {
+                for (int j = 0; j < ans[i].size(); j++) {
+                    cout << ans[i][j] << " ";
+                }
+                cout << endl;
+            }
+        }
+        return 0;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Dijkstras Algo using PQ
+
+    vector<int> dijkstraPQ(int V, vector<vector<pair<int, int>>> adj, int src){
+        vector<int> dist(V, 1e9);
+        dist[src] = 0;
+
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // Do not forget greater of pair.
+        pq.push({0, src});
+
+        while(!pq.empty()){
+            auto [d, node] = pq.top();
+            pq.pop();
+
+            if(d > dist[node]) continue;
+
+            for(auto &x : adj[node]){
+                int nei = x[0];
+                int wt = x[1];
+
+                if(d + wt < dist[nei]) {
+                    dist[nei] = d + wt;
+                    pq.push({dist[nei], nei});
+                }
+            }
+        }
+
+        return dist;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Dijkstra's Algo using Set
+    // Note: Set stores unique items in ascending order.
+
+    vector<int> dijkstra(int V, vector<vector<pair<int,int>>> &adj, int src) {
+        vector<int> dist(V, INT_MAX);
+        dist[src] = 0;
+
+        set<pair<int,int>> st;
+        st.insert({0, src});
+
+        while (!st.empty()) {
+            auto it = *(st.begin());
+            int node = it.second;
+            int d = it.first;
+            st.erase(it);
+
+            for (auto &edge : adj[node]) {
+                int next = edge.first;
+                int wt = edge.second;
+
+                if (d + wt < dist[next]) {
+                    if (dist[next] != INT_MAX)
+                        st.erase({dist[next], next});
+
+                    dist[next] = d + wt;
+                    st.insert({dist[next], next});
+                }
+            }
+        }
+        return dist;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////
 
 };
 
