@@ -2,35 +2,21 @@
 
 Author: [Prakash JC](https://prakash079513.github.io)
 
-Below is a **proper, placement-ready editorial** for **LeetCode 26 – Remove Duplicates from Sorted Array**, written cleanly and strictly correct.
-
 ## Problem Statement
 
-You are given a **sorted** integer array `nums`.
+You are given a **sorted** integer array `nums`. Remove the duplicates **in-place** such that each unique element appears only once. Return the number of unique elements. The relative order **must be preserved**.
 
-Remove the duplicates **in-place** such that each unique element appears only once.
-
-Return the number of unique elements.
-
-The relative order **must be preserved**.
-
-## Approach 1: Brute Force (Extra Space – Not Allowed)
+## Brute Force Approach
 
 - Traverse the array and insert elements into a set or another array
 - Copy unique elements back into `nums`
 - Return the size of the set
 
-### Why this is trash
+**Time Complexity: `O(n)`**
 
-- Uses extra space
-- Violates problem constraints
-- Will be rejected in interviews
+**Space Complexity: `O(n)`**
 
-### Time Complexity: `O(n)`
-
-### Space Complexity: `O(n)`
-
-## Approach 2: Optimal (Two Pointers – In-place)
+## Two Pointers – In-place
 
 ### Key Observation
 
@@ -38,7 +24,7 @@ The relative order **must be preserved**.
 - Duplicates are **adjacent**
 - We only need to keep one occurrence of each number
 
-### Strategy
+### Approach
 
 - Use pointer `k` to track position of next unique element
 - Start `k = 1` (first element is always unique)
@@ -48,7 +34,7 @@ The relative order **must be preserved**.
   - Increment `k`
 - First `k` elements of `nums` are the answer
 
-## Code (C++)
+## Code
 
 ```cpp
 int removeDuplicates(vector<int>& nums) {
@@ -65,8 +51,6 @@ int removeDuplicates(vector<int>& nums) {
     return k;
 }
 ```
-
-## Complexity Analysis
 
 **Time Complexity:** `O(n)` – single pass through the array
 
