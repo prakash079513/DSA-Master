@@ -17,6 +17,35 @@ You may assume that the majority element **always exists** in the array.
 - For every element, count its frequency by scanning the entire array
 - If frequency > n/2, return that element
 
+### Code
+
+```cpp
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+
+            // Count frequency of nums[i]
+            for (int j = 0; j < n; j++) {
+                if (nums[j] == nums[i]) {
+                    count++;
+                }
+            }
+
+            // Check if it is the majority element
+            if (count > n / 2) {
+                return nums[i];
+            }
+        }
+
+        return -1; // This line won't be reached as majority element is guaranteed.
+    }
+};
+```
+
 **Time Complexity: `O(n^2)`**
 
 **Space Complexity: `O(1)`**
@@ -42,8 +71,6 @@ You may assume that the majority element **always exists** in the array.
   - Else decrement `count`
 - After traversal, `candidate` holds the majority element
 
----
-
 ### Dry Run
 
 Array: `3 3 3 2 3 2`
@@ -58,8 +85,6 @@ Array: `3 3 3 2 3 2`
 | 6    | 2       | 3         | 2     |
 
 Final Candidate = **3**
-
----
 
 ### Code (Moore’s Voting)
 
@@ -100,8 +125,6 @@ int majorityElement(vector<int>& nums) {
     return -1;
 }
 ```
-
----
 
 **Time Complexity:** `O(n)` – single traversal
 
