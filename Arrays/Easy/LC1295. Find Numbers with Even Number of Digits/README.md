@@ -10,6 +10,7 @@ Given an array `nums` of integers, return how many of them contain an **even num
 
 ### Key Takeaway
 
+-
 - Divide by 10 or use range-based shortcuts.
 
 ---
@@ -20,7 +21,8 @@ Given an array `nums` of integers, return how many of them contain an **even num
 
 - Traverse each element in the array
 - Convert each number to string
-- Check length of string
+- Conversion takes O(d) time, d is the number of digits in the integer.
+- Check length of string. Checking takes O(1) time only.
 - If length is even, increment count
 - Return count
 
@@ -46,8 +48,6 @@ Given an array `nums` of integers, return how many of them contain an **even num
   - If digit count is even → increment answer
 - Return count
 
----
-
 ## Code
 
 ```cpp
@@ -71,6 +71,10 @@ int findNumbers(vector<int>& nums) {
 }
 ```
 
+**Time Complexity:** `O(n * d)` – digit counting per number
+
+**Space Complexity:** `O(1)` – constant space
+
 ---
 
 ## Approach 3 – Range Check (Fastest but Limited)
@@ -87,6 +91,7 @@ int findNumbers(vector<int>& nums) {
 
 - Traverse array
 - Check if number lies in even-digit ranges
+- Note: That checking takes O(1) time. Refer Snippets file for reasons.
 - Increment count accordingly
 
 ## Code
@@ -108,7 +113,7 @@ int findNumbers(vector<int>& nums) {
 
 ---
 
-**Time Complexity:** `O(n * d)` – digit counting per number
+**Time Complexity:** `O(n)`
 
 **Space Complexity:** `O(1)` – constant space
 
